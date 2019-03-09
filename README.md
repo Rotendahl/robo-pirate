@@ -23,8 +23,8 @@ between meetings. If people type ```bash
     @robo-pirate Vote [public | private] Should we give the bot more rum?.
 I will create a new message and ask people to vote in the message thread.
 If the decision reaches a majority vote I will post the vote results to a
-google sheet. The [public| private] flag decides on if I post to a public or
-private sheet.
+specified decision channel. The [public| private] flag decides on if I post to
+a public or private decision channel.
 ""`  
 
 
