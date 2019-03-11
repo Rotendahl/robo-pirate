@@ -1,4 +1,4 @@
-<h3 align="center"><img src="avatar.png"/ width="100px"></h3>
+<h3 align="center"><img src="assets/avatar.png"/ width="100px"></h3>
 <h3 align="center">Beep, Beep, Yarrh! </h3>
 
 ## Robo pirate
