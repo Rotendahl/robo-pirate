@@ -6,7 +6,7 @@ defmodule RoboPirate do
       Plug.Adapters.Cowboy.child_spec(
         scheme: :http,
         plug: RoboPirate.Router,
-        options: [port: 4000]
+        options: [port: Application.get_env(:robo_pirate, :port)]
       )
     ]
 
