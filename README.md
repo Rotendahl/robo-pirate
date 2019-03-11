@@ -18,7 +18,7 @@ greeted with a welcome message and instructions on how we use slack.
 - [ ] **Check for profile description:** Since we are so many people in our
 slack we want people to write their department in their profile. I will write
 them a friendly reminder until they do it.
-- [ ] **Decisions:** The board of Coding Pirates uses slack to make decision
+- [x] **Decisions:** The board of Coding Pirates uses slack to make decision
 between meetings. If people type
 `@robo-pirate Vote [public | private] Should we give the bot more rum?`.
 I will create a new message and ask people to vote in the message thread.
