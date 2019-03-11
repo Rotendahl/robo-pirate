@@ -2,6 +2,8 @@ defmodule RoboPirate do
   use Application
 
   def start(_type, _args) do
+    IO.inspect "PORT IS"
+    IO.inspect Application.get_env(:robo_pirate, :port)
     children = [
       Plug.Adapters.Cowboy.child_spec(
         scheme: :http,
