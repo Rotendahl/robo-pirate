@@ -8,6 +8,10 @@ defmodule RoboPirate.Router do
   plug(:match)
   plug(:dispatch)
 
+  get "" do
+    send_resp(conn, 200, "Robo pirate, has no face")
+  end
+
   post "/event" do
     IO.inspect(conn.body_params)
     %{"type" => type} = conn.body_params
