@@ -28,4 +28,7 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env()}.exs"
-import_config "secret.exs"
+use Mix.Config
+
+config :robo_pirate, slack_token: System.get_env('SLACK_TOKEN') || "xxxx"
+config :robo_pirate,bot_token: System.get_env('BOT_TOKEN') || "xxxx"
