@@ -23,3 +23,4 @@ erl_crash.dump
 robo_pirate-*.tar
 
 *.DS_Store
+secret.exs
