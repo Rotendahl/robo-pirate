@@ -19,7 +19,7 @@ greeted with a welcome message and instructions on how we use slack.
 slack we want people to write their department in their profile. I will write
 them a friendly reminder until they do it.
 - [ ] **Decisions:** The board of Coding Pirates uses slack to make decision
-between meetings. If people type 
+between meetings. If people type
 `@robo-pirate Vote [public | private] Should we give the bot more rum?`.
 I will create a new message and ask people to vote in the message thread.
 If the decision reaches a majority vote I will post the vote results to a
@@ -29,21 +29,13 @@ a public or private decision channel.
 
 
 ### Setup
-You must create a file called `config/secret.exs` with the following fields
-```bash
-    config :robo_pirate, slack_token: "xxxx"
-    config :robo_pirate, bot_token: "xxxx"
-
-```
-
-TODO: Document this
-
-### Deployment
-TODO: Document this
+If you want to develop on the bot you need to fill in token in
+`config/config.exs`. This can be done by creating your own slack for testing
+purposes. Slack has nice guide for setting up a test environment with `ngrok`.
+You must configure a URL for the events API as described in their
+[tutorial](https://api.slack.com/events-api).
 
 
 ### Contributing
-TODO: Document this
-
-
-
+Pull requests are more than welcome, if you want to discuss the development
+either create an issue or jump into our slack and ask in `#robo-pirate-dev`  
