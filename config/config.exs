@@ -35,6 +35,6 @@ config :robo_pirate, bot_token: System.get_env("BOT_TOKEN") || "xxxx"
 config :robo_pirate, port: System.get_env("PORT") || "4000"
 
 config :robo_pirate, board: [
-  "rotendahl", "l_overgaard", "liszachofrb", "john_john (Herning og HB)",
+  "rotendahl", "l_overgaard", "liszachofrb", "john_john",
   "sunenilausen", "nikbyhr", "matjoerg", "mikkelkisling"
 ]
