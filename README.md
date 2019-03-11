@@ -31,11 +31,16 @@ a public or private decision channel.
 ### Setup
 If you want to develop on the bot you need to fill in token in
 `config/config.exs`. This can be done by creating your own slack for testing
-purposes. Slack has nice guide for setting up a test environment with `ngrok`.
-You must configure a URL for the events API as described in their
+purposes. Slack has nice [guide][guide] for setting up a test environment with
+`ngrok`. You must configure a URL for the events API as described in their
 [tutorial](https://api.slack.com/events-api).
 
 
 ### Contributing
 Pull requests are more than welcome, if you want to discuss the development
 either create an issue or jump into our slack and ask in `#robo-pirate-dev`  
+
+
+
+
+[guide]: https://api.slack.com/tutorials/tunneling-with-ngrok
