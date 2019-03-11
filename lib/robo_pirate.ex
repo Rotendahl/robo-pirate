@@ -1,18 +1,15 @@
 defmodule RoboPirate do
-  @moduledoc """
-  Documentation for RoboPirate.
-  """
+  use Application
 
-  @doc """
-  Hello world.
+  def start(_type, _args) do
+    children = [
+      Plug.Adapters.Cowboy.child_spec(
+        scheme: :http,
+        plug: RoboPirate.Router,
+        options: [port: 4000]
+      )
+    ]
 
-  ## Examples
-
-      iex> RoboPirate.hello()
-      :world
-
-  """
-  def hello do
-    :world
+    Supervisor.start_link(children, strategy: :one_for_one)
   end
 end
