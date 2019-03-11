@@ -2,7 +2,6 @@ defmodule RoboPirate do
   use Application
 
   def start(_type, _args) do
-    IO.inspect "PORT IS"
     {port, _} = Integer.parse(Application.get_env(:robo_pirate, :port))
     children = [
       Plug.Adapters.Cowboy.child_spec(
