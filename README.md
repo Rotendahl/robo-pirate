@@ -10,7 +10,7 @@ Coding Pirates.
 ### My tasks
 Below you see a list of the task I either intend to learn or already can do.
 
-- [ ]  **Post when new channel is created:** Once a new channel is created I
+- [x]  **Post when new channel is created:** Once a new channel is created I
 should post the name of the channel along with a link to it in the
 #announcements channel.
 - [ ] **Welcome new people:** Once a new user joins our slack they should be
@@ -29,6 +29,13 @@ a public or private decision channel.
 
 
 ### Setup
+You must create a file called `config/secret.exs` with the following fields
+```bash
+    config :robo_pirate, slack_token: "xxxx"
+    config :robo_pirate, bot_token: "xxxx"
+
+```
+
 TODO: Document this
 
 ### Deployment
