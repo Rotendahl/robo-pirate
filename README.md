@@ -2,7 +2,7 @@
 <h3 align="center">Beep, Beep, Yarrh! </h3>
 
 ## Robo pirate
-I am the robot servant for the [Coding Pirates][https://Codingpirates.dk] slack
+I am the robot servant for the [Coding Pirates](https://Codingpirates.dk) slack
 channel. My purpose is to aid in the communication for all the volunteers in
 Coding Pirates.
 
@@ -19,11 +19,11 @@ greeted with a welcome message and instructions on how we use slack.
 slack we want people to write their department in their profile. I will write
 them a friendly reminder until they do it.
 - [ ] **Decisions:** The board of Coding Pirates uses slack to make decision
-between meetings. If people type ```bash
-    @robo-pirate Vote [public | private] Should we give the bot more rum?.
+between meetings. If people type 
+`@robo-pirate Vote [public | private] Should we give the bot more rum?`.
 I will create a new message and ask people to vote in the message thread.
 If the decision reaches a majority vote I will post the vote results to a
-specified decision channel. The [public| private] flag decides on if I post to
+specified decision channel. The `[public| private]` flag decides on if I post to
 a public or private decision channel.
 ""`  
 
@@ -47,5 +47,3 @@ TODO: Document this
 
 
 
-
-[cpdk]: https://Codingpirates.dk
