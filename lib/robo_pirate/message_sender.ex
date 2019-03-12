@@ -25,7 +25,7 @@ defmodule RoboPirate.MessageSender do
       "Ohøj kære pirater!\n" <>
         "<@#{creator}> har lige søsat kanalen <##{channel}> kig ind hvis du " <>
         "synes det lyder spændende!"
-    send_message(@announcemnts_id, message)
+    send_message(message, @announcemnts_id)
   end
 
   def dont_understand(channel) do
