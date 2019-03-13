@@ -1,6 +1,6 @@
 defmodule RoboPirate.MessageSender do
   @announcemnts_id "C0CNF7F0C"
-  @url "https://slack.com/api/chat.postMessage"
+  @url Application.get_env(:robo_pirate, :slack_url) <>"chat.postMessage"
   @token Application.get_env(:robo_pirate, :bot_token)
   @headers [
     {"Content-Type", "application/json"},

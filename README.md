@@ -27,20 +27,25 @@ specified decision channel. The `[public| private]` flag decides on if I post to
 a public or private decision channel.
 ""`  
 
-
-### Setup
-If you want to develop on the bot you need to fill in token in
-`config/config.exs`. This can be done by creating your own slack for testing
-purposes. Slack has nice [guide][guide] for setting up a test environment with
+### Development setup
+The production setup is based on heroku which dictates that all configuration
+should be as environment variables. You need to fill in the values in
+`secret.example.exs` and rename it to `secret.exs`. To obtaion the values either
+create your own slack for testings purposes or join [this one][inviteLink] and
+ask @rotendahl for the tokens.
+Slack has nice [guide][guide] for setting up a test environment with
 `ngrok`. You must configure a URL for the events API as described in their
 [tutorial](https://api.slack.com/events-api).
+
 
 
 ### Contributing
 Pull requests are more than welcome, if you want to discuss the development
 either create an issue or jump into our slack and ask in `#robo-pirate-dev`  
-
+If you want a development setup, join the [dev slack][inviteLink] and ask for
+a token pair.
 
 
 
 [guide]: https://api.slack.com/tutorials/tunneling-with-ngrok
+[inviteLink]: https://join.slack.com/t/codingpirates-dev/shared_invite/enQtNTc3Mzk5OTk3MDYyLTFmYjg3MjE1ODhlOTZlOWU2MGQ2MGIzMzliN2RhYTZiODEzMGUxMjY5YmY4NWIzMjg3YTU5MDNiMmI4NWQ5OWY
