@@ -95,7 +95,7 @@ defmodule RoboPirate.ActionHandler do
 
   defp has_voted(user, attachmens) do
     Enum.reduce(attachmens, false, fn attach, acc ->
-      attach["text"] =~ user or acc
+      (attach["text"] =~ "Stemmer" and attach["text"] =~ user) or acc
     end)
   end
 
