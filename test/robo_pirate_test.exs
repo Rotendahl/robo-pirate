@@ -8,8 +8,10 @@ defmodule RoboPirateTest do
   @opts Router.init([])
 
   test "Test get root / call" do
-    %{resp_body: resp} = conn(:get, "/", "")
+    %{resp_body: resp} =
+      conn(:get, "/", "")
       |> Router.call(@opts)
+
     assert resp == "Robo pirate, has no face"
   end
 
@@ -20,16 +22,17 @@ defmodule RoboPirateTest do
       challenge: String.reverse(@token)
     }
 
-    %{resp_body: resp, status: status} = conn(:post, "/event", payload)
-    |> Router.call(@opts)
+    %{resp_body: resp, status: status} =
+      conn(:post, "/event", payload)
+      |> Router.call(@opts)
 
     assert status == 200
     assert resp == String.reverse(@token)
 
-    %{status: deny} = conn(:post, "/event", Map.put(payload, :token, "a"))
+    %{status: deny} =
+      conn(:post, "/event", Map.put(payload, :token, "a"))
       |> Router.call(@opts)
 
     assert deny == 401
   end
-
 end

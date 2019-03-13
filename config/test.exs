@@ -2,6 +2,7 @@ System.put_env(
   "SLACK_TOKEN",
   "fake-token"
 )
+
 #
 # System.put_env(
 #   "BOT_TOKEN",
@@ -15,9 +16,9 @@ System.put_env(
 
 System.put_env(
   "SLACK_URL",
-  "localhost:4040/test/" # Set to localhost in dev
+  # Set to localhost in dev
+  "localhost:4040/test/"
 )
-
 
 # System.put_env(
 #   "BOARD",

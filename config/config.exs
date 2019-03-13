@@ -46,6 +46,8 @@ config :robo_pirate, slack_url: System.get_env("SLACK_URL")
 
 config :robo_pirate, announcemnts_id: System.get_env("announcemnts_id")
 
-config :robo_pirate, board: System.get_env("BOARD")
-  |> String.replace(" ", "")
-  |> String.split(",")
+config :robo_pirate,
+  board:
+    System.get_env("BOARD")
+    |> String.replace(" ", "")
+    |> String.split(",")

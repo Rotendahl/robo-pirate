@@ -15,12 +15,14 @@ System.put_env(
 
 System.put_env(
   "BOARD",
-    "bob, alice, etc" # Slack user names
+  # Slack user names
+  "bob, alice, etc"
 )
 
 System.put_env(
   "SLACK_URL",
-  "https://slack.com/api/" # Set to localhost in dev
+  # Set to localhost in dev
+  "https://slack.com/api/"
 )
 
 System.put_env(
