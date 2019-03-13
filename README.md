@@ -43,7 +43,13 @@ Slack has nice [guide][guide] for setting up a test environment with
 Pull requests are more than welcome, if you want to discuss the development
 either create an issue or jump into our slack and ask in `#robo-pirate-dev`  
 If you want a development setup, join the [dev slack][inviteLink] and ask for
-a token pair.
+a token pair. There are unit tests that can be run be calling
+```bash
+    mix test
+    mix coveralls.html # To get test coverage
+```
+If you create test coverage open the generated file in `cover/excoveralls.html`
+and check. 
 
 
 
