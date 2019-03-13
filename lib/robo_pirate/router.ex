@@ -15,8 +15,6 @@ defmodule RoboPirate.Router do
 
   post "/action" do
     {:ok, payload} = conn.body_params["payload"] |> Poison.decode()
-    # IO.inspect(payload)
-    #Task.async(fn -> ActionHandler.handle_action(payload) end)
     conn
     |> put_resp_content_type("application/json")
     |> send_resp(200, ActionHandler.handle_action(payload))
@@ -33,7 +31,7 @@ defmodule RoboPirate.Router do
         if token == Application.get_env(:robo_pirate, :slack_token) do
           send_resp(conn, 200, chal)
         else
-          send_resp(conn, 500, "Incorret token")
+          send_resp(conn, 401, "Incorret token")
         end
 
       "event_callback" ->
