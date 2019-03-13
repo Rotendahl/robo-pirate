@@ -26,5 +26,4 @@ System.put_env(
 System.put_env(
   "announcemnts_id",
   "xxxxx"
-  #cp "C0CNF7F0C"
 )
