@@ -1,8 +1,15 @@
 defmodule RoboPirateTest do
   use ExUnit.Case
-  doctest RoboPirate
+  use Plug.Test
 
-  test "greets the world" do
-    assert RoboPirate.hello() == :world
+  alias RoboPirate.Router
+
+  @opts Router.init([])
+
+  test "Test / call" do
+    %{resp_body: resp} = conn(:get, "/", "")
+      |> Router.call(@opts)
+
+    assert resp == "Robo pirate, has no face"
   end
 end

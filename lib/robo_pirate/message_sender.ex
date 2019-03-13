@@ -1,5 +1,5 @@
 defmodule RoboPirate.MessageSender do
-  @announcemnts_id "C0CNF7F0C"
+  @announcemnts_id Application.get_env(:robo_pirate, :announcemnts_id)
   @url Application.get_env(:robo_pirate, :slack_url) <>"chat.postMessage"
   @token Application.get_env(:robo_pirate, :bot_token)
   @headers [

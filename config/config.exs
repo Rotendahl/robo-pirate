@@ -34,11 +34,17 @@ if File.exists?("config/secret.exs") do
   import_config "secret.exs"
 end
 
+if Mix.env() == :test do
+  import_config "test.exs"
+end
+
 config :robo_pirate, slack_token: System.get_env("SLACK_TOKEN")
 config :robo_pirate, bot_token: System.get_env("BOT_TOKEN")
 config :robo_pirate, port: System.get_env("PORT")
 
 config :robo_pirate, slack_url: System.get_env("SLACK_URL")
+
+config :robo_pirate, announcemnts_id: System.get_env("announcemnts_id")
 
 config :robo_pirate, board: System.get_env("BOARD")
   |> String.replace(" ", "")

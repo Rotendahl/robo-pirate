@@ -22,3 +22,9 @@ System.put_env(
   "SLACK_URL",
   "https://slack.com/api/" # Set to localhost in dev
 )
+
+System.put_env(
+  "announcemnts_id",
+  "xxxxx"
+  #cp "C0CNF7F0C"
+)
