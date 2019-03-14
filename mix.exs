@@ -33,7 +33,8 @@ defmodule RoboPirate.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:poison, "~> 4.0"},
       {:httpoison, "~> 1.5"},
-      {:excoveralls, ">= 0.0.0", only: :test}
+      {:excoveralls, ">= 0.0.0", only: :test},
+      {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false}
     ]
   end
 end

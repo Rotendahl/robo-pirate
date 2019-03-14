@@ -1,5 +1,4 @@
 language: elixir
-os: osx
 elixir:
   - '1.7.3'
 
@@ -9,3 +8,10 @@ env:
   - MIX_ENV=test
 script:
   - mix test
+
+before_install:
+- mix local.hex --force
+
+ addons:
+    apt:
+      update: true
