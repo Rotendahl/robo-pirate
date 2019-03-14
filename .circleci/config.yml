@@ -50,6 +50,8 @@ jobs:
         - save_cache: # and one more build cache for good measure
             key: v1-build-cache
             paths: "_build"
+
+        - run: mix test
         - store_test_results:  # upload junit test results for display in Test Summary
           # Read more: https://circleci.com/docs/2.0/collect-test-data/
             path: _build/test/lib/robo-pirate # Replace with the name of your :app
