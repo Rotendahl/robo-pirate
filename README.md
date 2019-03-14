@@ -2,7 +2,7 @@
 <h3 align="center">Beep, Beep, Yarrh! </h3>
 ## Robo pirate
 [![CircleCI](https://circleci.com/gh/Rotendahl/robo-pirate.svg?style=svg)](https://circleci.com/gh/Rotendahl/robo-pirate)
-
+[![Coverage Status](https://coveralls.io/repos/github/Rotendahl/robo-pirate/badge.svg?branch=)](https://coveralls.io/github/Rotendahl/robo-pirate?branch=)
 I am the robot servant for the [Coding Pirates](https://Codingpirates.dk) slack
 channel. My purpose is to aid in the communication for all the volunteers in
 Coding Pirates.
