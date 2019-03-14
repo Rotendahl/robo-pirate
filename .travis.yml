@@ -1,4 +1,5 @@
 language: elixir
+os: osx
 elixir:
   - 1.6
 env:
