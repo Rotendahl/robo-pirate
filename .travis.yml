@@ -6,9 +6,11 @@ branches:
 
 matrix:
   include:
-    - elixir: 1.7
-      otp_release: 21.0
-      env: CHECK_FORMATTED=false
+    - elixir: 1.6
+      otp_release: 19.3
+    # - elixir: 1.7
+    #   otp_release: 21.0
+    #   env: CHECK_FORMATTED=true
 
 install:
   - mix local.rebar --force
@@ -28,3 +30,4 @@ cache:
   directories:
   - _build
   - deps
+  - example/_build
