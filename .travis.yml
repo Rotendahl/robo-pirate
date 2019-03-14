@@ -1,7 +1,10 @@
 language: elixir
 os: osx
 elixir:
-  - 1.6
+  - '1.7.3'
+
+otp_release:
+  - '21.0'
 env:
   - MIX_ENV=test
 script:
