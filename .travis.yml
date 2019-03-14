@@ -1,14 +1,8 @@
 language: elixir
 elixir:
-  - '1.7.3'
-
-before_install:
-  - sudo apt-get update
-  - mix local.hex --force
-
+  - 1.7.4
 otp_release:
-  - '21.0'
-env:
-  - MIX_ENV=test
-script:
-  - mix test
+  - 21.2
+before_script:
+  - mix local.hex --force
+  - mix deps.get 
