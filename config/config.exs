@@ -30,7 +30,7 @@ use Mix.Config
 #     import_config "#{Mix.env()}.exs"
 use Mix.Config
 
-if File.exists?("config/secret.exs") do
+if Mix.env() == :dev do
   import_config "secret.exs"
 end
 
