@@ -50,7 +50,8 @@ a token pair. There are unit tests that can be run be calling
     mix coveralls.html # To get test coverage
 ```
 If you create test coverage open the generated file in `cover/excoveralls.html`
-and check.
+and check. All code on the master branch is deployed if the tests pass. 
+
 
 
 
