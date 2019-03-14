@@ -1,7 +1,8 @@
 <h3 align="center"><img src="assets/avatar.png"/ width="100px"></h3>
 <h3 align="center">Beep, Beep, Yarrh! </h3>
-
 ## Robo pirate
+[![CircleCI](https://circleci.com/gh/Rotendahl/robo-pirate.svg?style=svg)](https://circleci.com/gh/Rotendahl/robo-pirate)
+
 I am the robot servant for the [Coding Pirates](https://Codingpirates.dk) slack
 channel. My purpose is to aid in the communication for all the volunteers in
 Coding Pirates.
@@ -49,7 +50,7 @@ a token pair. There are unit tests that can be run be calling
     mix coveralls.html # To get test coverage
 ```
 If you create test coverage open the generated file in `cover/excoveralls.html`
-and check. 
+and check.
 
 
 
