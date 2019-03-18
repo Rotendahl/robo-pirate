@@ -26,6 +26,11 @@ System.put_env(
 )
 
 System.put_env(
+  "INVITE_THREAD",
+  "xxxx"
+)
+
+System.put_env(
   "announcemnts_id",
   "xxxxx"
 )

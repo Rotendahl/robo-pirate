@@ -9,6 +9,11 @@ System.put_env(
 )
 
 System.put_env(
+  "INVITE_THREAD",
+  ""
+)
+
+System.put_env(
   "PORT",
   "4000"
 )
