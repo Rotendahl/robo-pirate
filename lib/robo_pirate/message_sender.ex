@@ -21,6 +21,12 @@ defmodule RoboPirate.MessageSender do
     IO.inspect(HTTPoison.post(@url, body, @headers))
   end
 
+  def request_invite(params) do
+    {:ok, payload} = RoboPirate.RequestInvite.payload(params)
+    {:ok, %{status_code: status}} = HTTPoison.post(@url, payload, @headers)
+    status
+  end
+
   def new_channel(creator, channel) do
     message =
       "Ohøj kære pirater!\n" <>

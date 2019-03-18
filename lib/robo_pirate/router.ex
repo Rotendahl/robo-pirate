@@ -1,7 +1,9 @@
 defmodule RoboPirate.Router do
   alias RoboPirate.EventHandler
   alias RoboPirate.ActionHandler
+  alias RoboPirate.MessageSender
   use Plug.Router
+  use Plug.Builder
   use Plug.Debugger, otp_app: :robo_pirate
 
   plug(Plug.Logger)
@@ -14,8 +16,28 @@ defmodule RoboPirate.Router do
   plug(:match)
   plug(:dispatch)
 
-  get "" do
-    send_resp(conn, 200, "Robo pirate, has no face")
+  plug(Plug.Static,
+    at: "/lib/html",
+    from: :robo_pirate
+  )
+
+  # only: ~w(images robots.txt)
+  # plug :not_found
+
+  get "/" do
+    conn = put_resp_content_type(conn, "text/html")
+    send_file(conn, 200, "lib/html/index.html")
+  end
+
+  post "/invite" do
+    %{body_params: params} = conn
+    status_code = MessageSender.request_invite(params)
+
+    if status_code == 200 do
+      send_file(conn, status_code, "lib/html/success.html")
+    else
+      send_file(conn, status_code, "lib/html/error.html")
+    end
   end
 
   post "/action" do
