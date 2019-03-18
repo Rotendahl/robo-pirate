@@ -1,11 +1,12 @@
 defmodule RoboPirate do
+  alias Plug.Adapters.Cowboy
   use Application
 
   def start(_type, _args) do
     {port, _} = Integer.parse(Application.get_env(:robo_pirate, :port))
 
     children = [
-      Plug.Adapters.Cowboy.child_spec(
+      Cowboy.child_spec(
         scheme: :http,
         plug: RoboPirate.Router,
         options: [port: port]

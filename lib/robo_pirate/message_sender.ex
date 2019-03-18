@@ -28,8 +28,7 @@ defmodule RoboPirate.MessageSender do
       }
       |> Poison.encode()
 
-    IO.inspect("Sending message")
-    IO.inspect(HTTPoison.post(@send_url, body, @headers))
+    HTTPoison.post(@send_url, body, @headers)
   end
 
   def request_invite(params) do
@@ -53,7 +52,6 @@ defmodule RoboPirate.MessageSender do
   end
 
   def vote(user, privacy, proposal) do
-    # TODO fix this
     {priv, channel} =
       if privacy == "private" do
         {"Privat forslag fremstillet\n", @priv_vote_channel}

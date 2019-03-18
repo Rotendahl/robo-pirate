@@ -1,6 +1,5 @@
 defmodule RoboPirate.ActionHandler do
   alias RoboPirate.Actions.InviteHandler
-  alias RoboPirate.MessageSender
   # seconds
   @vote_interval 120
   @votes_needed 5
@@ -66,10 +65,8 @@ defmodule RoboPirate.ActionHandler do
 
   defp cast_vote(attachments, user, decision) do
     decision_record =
-      Enum.filter(
-        attachments,
-        fn attach -> attach["text"] =~ decision end
-      )
+      attachments
+      |> Enum.filter(fn attach -> attach["text"] =~ decision end)
       |> hd
 
     val = decision_record["text"] <> " <@#{user}>"
@@ -88,10 +85,8 @@ defmodule RoboPirate.ActionHandler do
 
   defp add_decision(attachments, text) do
     nr_votes =
-      Enum.filter(
-        attachments,
-        fn attach -> attach["text"] =~ "Stemmer for" end
-      )
+      attachments
+      |> Enum.filter(fn attach -> attach["text"] =~ "Stemmer for" end)
       |> hd
       |> Map.get("text")
       |> String.split("<@")

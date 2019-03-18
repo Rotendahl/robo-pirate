@@ -45,7 +45,9 @@ defmodule RoboPirate.Actions.InviteHandler do
 
     if decision == "send_invite" do
       info_block =
-        Enum.filter(blocks, fn block -> Map.has_key?(block, "fields") end) |> hd
+        blocks
+        |> Enum.filter(fn block -> block |> Map.has_key?("fields") end)
+        |> hd
 
       send_invite(info_block)
     end
@@ -54,37 +56,48 @@ defmodule RoboPirate.Actions.InviteHandler do
   end
 
   def send_invite(%{"fields" => fields}) do
-    info = Enum.map(fields, fn %{"text" => field} ->
-      cond do
-        field =~ "*Navn:*\n" ->
-          {:name, String.replace(field, "*Navn:*\n", "")}
+    info =
+      fields
+      |> Enum.map(fn %{"text" => field} ->
+        cond do
+          field =~ "*Navn:*\n" ->
+            {:name, String.replace(field, "*Navn:*\n", "")}
 
-        field =~ "*Mail:*\n" ->
-          mail =
-            String.split(field, "|")
-            |> List.last()
-            |> String.replace(">", "")
+          field =~ "*Mail:*\n" ->
+            mail =
+              field
+              |> String.split("|")
+              |> List.last()
+              |> String.replace(">", "")
 
-          {:mail, mail}
+            {:mail, mail}
 
-        field =~ "Type" -> {:type, if field =~ "frivillig" do
-          "frivillig"
+          field =~ "Type" ->
+            {:type,
+             if field =~ "frivillig" do
+               "frivillig"
+             else
+               "barn"
+             end}
+
+          field =~ "*Info:*\n" ->
+            {:info, String.replace(field, "*Info:*\n", "")}
+        end
+      end)
+      |> Map.new()
+
+    req_fields =
+      [{:token, @token}, {:email, info[:mail]}] ++
+        if info[:type] == "frivillig" do
+          [{:channels, @vol_channels}]
         else
-          "barn"
-        end}
+          [{:channels, @child_channels}, {:restricted, true}]
+        end
 
-        field =~ "*Info:*\n" -> {:info, String.replace(field, "*Info:*\n", "")}
-      end
-    end) |> Map.new
+    body = {:form, req_fields}
 
-    req_fields = [{:token, @token}, {:email, info[:mail]}] ++ if info[:type] == "frivillig" do
-      [{:channels, @vol_channels}]
-    else
-      [{:channels, @child_channels}, {:restricted, true}]
-    end
-
-    body ={:form, req_fields}
-    IO.inspect HTTPoison.request(:post, "https://slack.com/api/users.admin.invite", body,
-    [{"Content-Type", "application/x-www-form-urlencoded"}])
+    HTTPoison.request(:post, "https://slack.com/api/users.admin.invite", body, [
+      {"Content-Type", "application/x-www-form-urlencoded"}
+    ])
   end
 end

@@ -1,7 +1,7 @@
 defmodule RoboPirate.Router do
+  alias RoboPirate.ActionHandler
   alias RoboPirate.AuthHelper
   alias RoboPirate.EventHandler
-  alias RoboPirate.ActionHandler
   alias RoboPirate.MessageSender
   use Plug.Router
   use Plug.Builder
