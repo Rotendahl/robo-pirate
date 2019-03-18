@@ -1,0 +1,42 @@
+<html>
+
+<head>
+  <title>Invitation til Coding Pirates Slack</title>
+  <meta charset="UTF-8">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="jumbotron jumbotron-fluid">
+      <a href="https://codingpirates.dk">
+        <img src="https://codingpirates.dk/wp-content/uploads/2016/09/Forside-Logo.png" class="img-fluid">
+      </a>
+      <h1 class="display-3">Invitation til Coding Pirates Slack</h1>
+      <h2>Indtast dine informationer her og modtag en invitation på e-mail.</h2>
+    </div>
+  </div>
+  <div class="container">
+    <form method="POST" action="/invite">
+      <div class="form-group">
+        <label for="name">Navn:</label>
+        <input name="name" type="text" class="form-control" id="name" placeholder="Miss 1337" required>
+        <label for="email">Email</label>
+        <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Kaptajn@Hack.dk" required>
+      </div>
+      <div class="form-group">
+        <label for="type"><strong>Frivillig eller barn?</strong></label>
+        <label class="radio-inline"><input type="radio" name="type" value="frivillig" required>Frivillig</label>
+        <label class="radio-inline"><input type="radio" name="type" value="barn" required>barn</label>
+      </div>
+      <div class="form-group">
+        <label for="info">Info:</label>
+        <textarea name="info" class="form-control" rows="5" id="info" placeholder="Fortæl lidt om dig selv. Hvilken forening/afdeling? Sidder du i en bestyrelse? Er der andet vi skal vide?" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Indsend</button>
+    </form>
+  </div>
+</body>
+
+</html>
