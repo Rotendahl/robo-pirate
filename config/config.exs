@@ -41,6 +41,7 @@ end
 config :robo_pirate, slack_token: System.get_env("SLACK_TOKEN")
 config :robo_pirate, bot_token: System.get_env("BOT_TOKEN")
 config :robo_pirate, port: System.get_env("PORT")
+config :robo_pirate, sign_secret: System.get_env("SIGN_SECRET")
 
 config :robo_pirate, slack_url: System.get_env("SLACK_URL")
 config :robo_pirate, invite_channel: System.get_env("INVITE_THREAD")

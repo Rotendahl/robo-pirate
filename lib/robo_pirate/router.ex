@@ -1,4 +1,5 @@
 defmodule RoboPirate.Router do
+  alias RoboPirate.AuthHelper
   alias RoboPirate.EventHandler
   alias RoboPirate.ActionHandler
   alias RoboPirate.MessageSender
@@ -10,7 +11,8 @@ defmodule RoboPirate.Router do
 
   plug(Plug.Parsers,
     parsers: [:json, :urlencoded, :multipart],
-    json_decoder: Poison
+    json_decoder: Poison,
+    body_reader: {RoboPirate.RawPlug, :read_body, []}
   )
 
   plug(:match)
@@ -20,9 +22,6 @@ defmodule RoboPirate.Router do
     at: "/lib/html",
     from: :robo_pirate
   )
-
-  # only: ~w(images robots.txt)
-  # plug :not_found
 
   get "/" do
     conn = put_resp_content_type(conn, "text/html")
@@ -41,18 +40,20 @@ defmodule RoboPirate.Router do
   end
 
   post "/action" do
-    {:ok, payload} = conn.body_params["payload"] |> Poison.decode()
+    if conn |> AuthHelper.from_slack? do
+      {:ok, payload} = conn.body_params["payload"] |> Poison.decode()
+      conn
+      |> put_resp_content_type("application/json")
+      |> send_resp(200, ActionHandler.handle_action(payload))
+    else
+       send_resp(conn, 401, "Only slack can issue actions")
+    end
 
-    conn
-    |> put_resp_content_type("application/json")
-    |> send_resp(200, ActionHandler.handle_action(payload))
   end
 
   post "/event" do
-    IO.inspect(conn.body_params)
     %{"type" => type} = conn.body_params
     params = conn.body_params
-
     case type do
       "url_verification" ->
         %{"token" => token, "challenge" => chal} = conn.body_params
@@ -64,17 +65,18 @@ defmodule RoboPirate.Router do
         end
 
       "event_callback" ->
-        Task.async(fn -> EventHandler.handle_event(params) end)
-        send_resp(conn, 200, "")
-
+        if conn |> AuthHelper.from_slack? do
+          Task.async(fn -> EventHandler.handle_event(params) end)
+          send_resp(conn, 200, "")
+        else
+           send_resp(conn, 401, "Only slack can issue actions")
+        end
       _ ->
-        IO.inspect("Event not handled: #{type}")
         send_resp(conn, 200, "not_supported")
     end
   end
 
   match _ do
-    IO.inspect(conn)
     send_resp(conn, 404, "not_found")
   end
 end

@@ -9,8 +9,8 @@ System.put_env(
 )
 
 System.put_env(
-  "INVITE_THREAD",
-  ""
+  "SIGN_SECRET",
+  "xxxx"
 )
 
 System.put_env(
@@ -32,5 +32,10 @@ System.put_env(
 
 System.put_env(
   "announcemnts_id",
-  "xxxxx"
+  "xxxx"
+)
+
+System.put_env(
+  "INVITE_THREAD",
+  "xxxx"
 )
