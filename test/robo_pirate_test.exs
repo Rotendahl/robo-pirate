@@ -12,7 +12,8 @@ defmodule RoboPirateTest do
       conn(:get, "/", "")
       |> Router.call(@opts)
 
-    assert resp == "Robo pirate, has no face"
+    index = File.read("lib/html/index.html") |> elem(1)
+    assert resp == index
   end
 
   test "Test verify url" do

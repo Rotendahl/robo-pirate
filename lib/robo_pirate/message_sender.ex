@@ -1,6 +1,7 @@
 defmodule RoboPirate.MessageSender do
   @announcemnts_id Application.get_env(:robo_pirate, :announcemnts_id)
-  @url Application.get_env(:robo_pirate, :slack_url) <> "chat.postMessage"
+  @send_url Application.get_env(:robo_pirate, :slack_url) <> "chat.postMessage"
+  @update_url Application.get_env(:robo_pirate, :slack_url) <> "chat.update"
   @token Application.get_env(:robo_pirate, :bot_token)
   @headers [
     {"Content-Type", "application/json"},
@@ -8,6 +9,16 @@ defmodule RoboPirate.MessageSender do
   ]
   @priv_vote_channel "CGUM3F5AM"
   @pub_vote_channel "GGV8NHXT4"
+
+  def update_message(payload) do
+    body =
+      payload
+      |> Map.put(:token, @token)
+      |> Poison.encode()
+      |> elem(1)
+
+    HTTPoison.post(@update_url, body, @headers)
+  end
 
   def send_message(text, channel) do
     {:ok, body} =
@@ -18,12 +29,12 @@ defmodule RoboPirate.MessageSender do
       |> Poison.encode()
 
     IO.inspect("Sending message")
-    IO.inspect(HTTPoison.post(@url, body, @headers))
+    IO.inspect(HTTPoison.post(@send_url, body, @headers))
   end
 
   def request_invite(params) do
     {:ok, payload} = RoboPirate.RequestInvite.payload(params)
-    {:ok, %{status_code: status}} = HTTPoison.post(@url, payload, @headers)
+    {:ok, %{status_code: status}} = HTTPoison.post(@send_url, payload, @headers)
     status
   end
 
@@ -102,7 +113,7 @@ defmodule RoboPirate.MessageSender do
       }
       |> Poison.encode()
 
-    {:ok, resp} = HTTPoison.post(@url, payload, @headers)
+    {:ok, resp} = HTTPoison.post(@send_url, payload, @headers)
     %HTTPoison.Response{status_code: 200, body: body} = resp
     {:ok, %{"ts" => thead_id}} = Poison.decode(body)
 
@@ -120,6 +131,6 @@ defmodule RoboPirate.MessageSender do
       }
       |> Poison.encode()
 
-    IO.inspect(HTTPoison.post(@url, thread_payload, @headers))
+    IO.inspect(HTTPoison.post(@send_url, thread_payload, @headers))
   end
 end

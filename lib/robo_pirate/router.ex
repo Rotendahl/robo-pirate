@@ -40,20 +40,19 @@ defmodule RoboPirate.Router do
   end
 
   post "/action" do
-    if conn |> AuthHelper.from_slack? do
+    if conn |> AuthHelper.from_slack?() do
       {:ok, payload} = conn.body_params["payload"] |> Poison.decode()
-      conn
-      |> put_resp_content_type("application/json")
-      |> send_resp(200, ActionHandler.handle_action(payload))
+      Task.async(fn -> ActionHandler.handle_action(payload) end)
+      send_resp(conn, 200, "")
     else
-       send_resp(conn, 401, "Only slack can issue actions")
+      send_resp(conn, 401, "Only slack can issue actions")
     end
-
   end
 
   post "/event" do
     %{"type" => type} = conn.body_params
     params = conn.body_params
+
     case type do
       "url_verification" ->
         %{"token" => token, "challenge" => chal} = conn.body_params
@@ -65,12 +64,13 @@ defmodule RoboPirate.Router do
         end
 
       "event_callback" ->
-        if conn |> AuthHelper.from_slack? do
+        if conn |> AuthHelper.from_slack?() do
           Task.async(fn -> EventHandler.handle_event(params) end)
           send_resp(conn, 200, "")
         else
-           send_resp(conn, 401, "Only slack can issue actions")
+          send_resp(conn, 401, "Only slack can issue actions")
         end
+
       _ ->
         send_resp(conn, 200, "not_supported")
     end

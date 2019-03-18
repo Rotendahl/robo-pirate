@@ -1,11 +1,15 @@
 defmodule RoboPirate.ActionHandler do
+  alias RoboPirate.Actions.InviteHandler
+  alias RoboPirate.MessageSender
   # seconds
   @vote_interval 120
   @votes_needed 5
 
-  def handle_action(action = %{"callback_id" => "forslag"}) do
-    IO.inspect(action)
+  def handle_action(action = %{"actions" => [%{"value" => "invite"} | _]}) do
+    InviteHandler.invite(action)
+  end
 
+  def handle_action(action = %{"callback_id" => "forslag"}) do
     %{
       "actions" => [%{"value" => decision} | _],
       "original_message" => msg,

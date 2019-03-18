@@ -19,6 +19,21 @@ System.put_env(
 )
 
 System.put_env(
+  "LEGACY_TOKEN",
+  "xxxx"
+)
+
+System.put_env(
+  "VOLUNTEER_CHANNELS",
+  "xxxx, xxxx"
+)
+
+System.put_env(
+  "CHILD_CHANNELS",
+  "xxxx, xxxx"
+)
+
+System.put_env(
   "BOARD",
   # Slack user names
   "bob, alice, etc"
@@ -31,7 +46,7 @@ System.put_env(
 )
 
 System.put_env(
-  "announcemnts_id",
+  "ANNOUNCEMNTS_ID",
   "xxxx"
 )
 

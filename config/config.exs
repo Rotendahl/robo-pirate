@@ -42,10 +42,12 @@ config :robo_pirate, slack_token: System.get_env("SLACK_TOKEN")
 config :robo_pirate, bot_token: System.get_env("BOT_TOKEN")
 config :robo_pirate, port: System.get_env("PORT")
 config :robo_pirate, sign_secret: System.get_env("SIGN_SECRET")
-
+config :robo_pirate, legacy_token: System.get_env("LEGACY_TOKEN")
 config :robo_pirate, slack_url: System.get_env("SLACK_URL")
 config :robo_pirate, invite_channel: System.get_env("INVITE_THREAD")
-config :robo_pirate, announcemnts_id: System.get_env("announcemnts_id")
+config :robo_pirate, announcemnts_id: System.get_env("ANNOUNCEMNTS_ID")
+config :robo_pirate, volunteer_channels: System.get_env("VOLUNTEER_CHANNELS")
+config :robo_pirate, child_channels: System.get_env("CHILD_CHANNELS")
 
 config :robo_pirate,
   board:

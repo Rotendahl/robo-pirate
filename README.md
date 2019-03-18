@@ -15,6 +15,11 @@ Below you see a list of the task I either intend to learn or already can do.
 - [x]  **Post when new channel is created:** Once a new channel is created I
 should post the name of the channel along with a link to it in the
 #announcements channel.
+- [x]  **Invite people:** Visit the root ("/") of the server running me, and
+you'll see an invite form. Fill this out and I will present the info in the
+slack thread specified in the environment variables. If you accept the invite
+request I will send them an invite. 
+#announcements channel.
 - [ ] **Welcome new people:** Once a new user joins our slack they should be
 greeted with a welcome message and instructions on how we use slack.
 - [ ] **Check for profile description:** Since we are so many people in our
@@ -51,7 +56,7 @@ a token pair. There are unit tests that can be run be calling
     mix coveralls.html # To get test coverage
 ```
 If you create test coverage open the generated file in `cover/excoveralls.html`
-and check. All code on the master branch is deployed if the tests pass. 
+and check. All code on the master branch is deployed if the tests pass.
 
 
 

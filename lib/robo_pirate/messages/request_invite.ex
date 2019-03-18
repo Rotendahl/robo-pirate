@@ -45,21 +45,23 @@ defmodule RoboPirate.RequestInvite do
           elements: [
             %{
               type: "button",
+              value: "invite",
+              action_id: "send_invite",
               text: %{
                 type: "plain_text",
                 emoji: true,
                 text: "Send invitation"
-              },
-              value: "invite"
+              }
             },
             %{
               type: "button",
+              value: "invite",
+              action_id: "deny_invite",
               text: %{
                 type: "plain_text",
                 emoji: true,
                 text: "Afvis"
-              },
-              value: "reject"
+              }
             }
           ]
         }
