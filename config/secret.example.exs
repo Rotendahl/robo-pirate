@@ -19,6 +19,18 @@ System.put_env(
 )
 
 System.put_env(
+  "MAX_AGE", # The maximum age of a request in seconds before we rejct it,
+  # should be low in production to stop replay attacks but large in development
+  # and testing where we do use replays.
+  "315360000" # 10 years,
+)
+
+System.put_env(
+  "OAUTH_TOKEN",
+  "xxxx"
+)
+
+System.put_env(
   "LEGACY_TOKEN",
   "xxxx"
 )
