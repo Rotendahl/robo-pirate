@@ -1,5 +1,6 @@
 defmodule RoboPirate.AuthHelper do
   @sign_secret Application.get_env(:robo_pirate, :sign_secret)
+  @max_age Application.get_env(:robo_pirate, :max_age)
 
   def from_slack?(%Plug.Conn{assigns: %{raw_body: body}, req_headers: header}) do
     from_slack?(body, Map.new(header))
@@ -28,7 +29,7 @@ defmodule RoboPirate.AuthHelper do
 
     cond do
       # Might be replay attack
-      age_in_seconds > 20 -> false
+      age_in_seconds > @max_age -> false
       # valid
       "v0=#{signed}" == signature -> true
       # Default to not from slack
