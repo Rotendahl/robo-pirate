@@ -1,8 +1,7 @@
 <h3 align="center"><img src="assets/avatar.png"/ width="100px"></h3>
 <h3 align="center">Beep, Beep, Yarrh! </h3>
 
-## Robo pirate [![CircleCI](https://img.shields.io/circleci/project/github/CodingPirates/robo-pirate.svg?style=for-the-badge)](https://circleci.com/gh/CodingPirates/robo-pirate/tree/master) [![Coverage Status](https://img.shields.io/coveralls/github/CodingPirates/robo-pirate.svg?style=for-the-badge)](https://coveralls.io/github/CodingPirates/robo-pirate?branch=master)
-https://img.shields.io/coveralls/github/CodingPirates/robo-pirate.svg?style=for-the-badge
+## Robo pirate ![CircleCI (all branches)](https://img.shields.io/circleci/project/github/CodingPirates/robo-pirate.svg?style=for-the-badge) [![Coverage Status](https://img.shields.io/coveralls/github/CodingPirates/robo-pirate.svg?style=for-the-badge)](https://coveralls.io/github/CodingPirates/robo-pirate?branch=master)
 
 I am the robot servant for the [Coding Pirates](https://Codingpirates.dk) slack
 channel. My purpose is to aid in the communication for all the volunteers in
