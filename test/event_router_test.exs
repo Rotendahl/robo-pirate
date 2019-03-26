@@ -71,4 +71,93 @@ defmodule RoboPirateTest.RouterEvent do
     assert status == 401
     assert resp == "Incorret token"
   end
+
+  test "Event callback unhandled" do
+    payload =
+      %{
+        event: %{},
+        type: "event_callback"
+      }
+      |> Poison.encode!()
+
+    %{status: status, resp_body: resp} =
+      conn(:post, "/event", payload)
+      |> MockSlackHelper.add_slack_headers()
+      |> Router.call(@opts)
+
+    assert status == 500
+    assert resp == "Unhandled event"
+  end
+
+  test "Event callback bot mention" do
+    payload =
+      %{
+        event: %{type: "app_mention", subtype: "bot_message"},
+        type: "event_callback"
+      }
+      |> Poison.encode!()
+
+    %{status: status, resp_body: resp} =
+      conn(:post, "/event", payload)
+      |> MockSlackHelper.add_slack_headers()
+      |> Router.call(@opts)
+
+    assert status == 200
+    assert resp == "bot_message"
+  end
+
+  test "Event callback mention" do
+    expected_channel = "Some channel"
+
+    payload =
+      %{
+        event: %{
+          type: "app_mention",
+          text: "",
+          channel: expected_channel,
+          user: "some_User"
+        },
+        type: "event_callback"
+      }
+      |> Poison.encode!()
+
+    %{status: status, resp_body: resp} =
+      conn(:post, "/event", payload)
+      |> MockSlackHelper.add_slack_headers()
+      |> Router.call(@opts)
+
+    %{"text" => text, "channel" => actual_channel} = Poison.decode!(resp)
+    assert actual_channel == expected_channel
+    assert text =~ "Den forstod jeg ikke"
+    assert status == 200
+  end
+
+  test "Event new channel" do
+    new_channel = "Some channel"
+    creator = "some creator"
+
+    payload =
+      %{
+        event: %{
+          type: "channel_created",
+          channel: %{creator: creator, id: new_channel}
+        },
+        type: "event_callback"
+      }
+      |> Poison.encode!()
+
+    %{status: status, resp_body: resp} =
+      conn(:post, "/event", payload)
+      |> MockSlackHelper.add_slack_headers()
+      |> Router.call(@opts)
+
+    %{"text" => text, "channel" => announcment_channel} = Poison.decode!(resp)
+
+    assert announcment_channel ==
+             Application.get_env(:robo_pirate, :announcemnts_id)
+
+    assert text =~ creator
+    assert text =~ new_channel
+    assert status == 200
+  end
 end
