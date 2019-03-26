@@ -29,13 +29,9 @@ defmodule RoboPirate.Router do
   end
 
   post "/invite" do
-    %{body_params: params} = conn
-    status_code = MessageSender.request_invite(params)
-
-    if status_code == 200 do
-      send_file(conn, status_code, "lib/html/success.html")
-    else
-      send_file(conn, status_code, "lib/html/error.html")
+    case MessageSender.request_invite(conn.params) do
+      {:ok, _} -> send_file(conn, 200, "lib/html/success.html")
+      {:error, _reason} -> send_file(conn, 402, "lib/html/error.html")
     end
   end
 
