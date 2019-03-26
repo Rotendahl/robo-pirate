@@ -18,14 +18,14 @@ should post the name of the channel along with a link to it in the
 - [x]  **Invite people:** Visit the root ("/") of the server running me, and
 you'll see an invite form. Fill this out and I will present the info in the
 slack thread specified in the environment variables. If you accept the invite
-request I will send them an invite. 
+request I will send them an invite.
 #announcements channel.
 - [ ] **Welcome new people:** Once a new user joins our slack they should be
 greeted with a welcome message and instructions on how we use slack.
 - [ ] **Check for profile description:** Since we are so many people in our
 slack we want people to write their department in their profile. I will write
 them a friendly reminder until they do it.
-- [x] **Decisions:** The board of Coding Pirates uses slack to make decision
+- [ ] **Decisions:** The board of Coding Pirates uses slack to make decision
 between meetings. If people type
 `@robo-pirate Vote [public | private] Should we give the bot more rum?`.
 I will create a new message and ask people to vote in the message thread.
@@ -34,15 +34,31 @@ specified decision channel. The `[public| private]` flag decides on if I post to
 a public or private decision channel.
 ""`  
 
+### Configuration
+The bot coded according to the [12 factor principles](https://12factor.net),
+this means that all configuration happens through environment variables.
+The variables to be filled out can be found in `config/test.exs`, copy it to
+`config/secret.exs` for development.
+
+
+### Slack setup
+TODO: finish this
+
+
 ### Development setup
-The production setup is based on heroku which dictates that all configuration
-should be as environment variables. You need to fill in the values in
-`secret.example.exs` and rename it to `secret.exs`. To obtaion the values either
-create your own slack for testings purposes or join [this one][inviteLink] and
-ask @rotendahl for the tokens.
 Slack has nice [guide][guide] for setting up a test environment with
 `ngrok`. You must configure a URL for the events API as described in their
 [tutorial](https://api.slack.com/events-api).
+
+
+
+### Test setup
+TODO: finish this
+
+
+
+### Production setup
+TODO: finish this
 
 
 
@@ -57,7 +73,6 @@ a token pair. There are unit tests that can be run be calling
 ```
 If you create test coverage open the generated file in `cover/excoveralls.html`
 and check. All code on the master branch is deployed if the tests pass.
-
 
 
 
