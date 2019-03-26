@@ -1,4 +1,7 @@
 defmodule RoboPirate.RequestInvite do
+  @moduledoc """
+    Creates the message payload for the invite dialog
+  """
   @invite_channel Application.get_env(:robo_pirate, :invite_channel)
 
   def encode_payload(%{

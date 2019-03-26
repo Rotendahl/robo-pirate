@@ -1,4 +1,5 @@
 defmodule RoboPirate.Router do
+  require Logger
   alias RoboPirate.ActionHandler
   alias RoboPirate.AuthHelper
   alias RoboPirate.EventHandler
@@ -67,8 +68,13 @@ defmodule RoboPirate.Router do
             send_resp(conn, 401, "Incorret token")
           end
 
-        _unkown_event_type ->
-          send_resp(conn, 500, "Unhandled event Type")
+        nil ->
+          Logger.warn("No event type")
+          send_resp(conn, 400, "No event type")
+
+        unkown ->
+          Logger.warn("Unhandled event type: #{unkown}")
+          send_resp(conn, 400, "Unhandled event Type: #{unkown}")
       end
     else
       send_resp(conn, 401, "Only slack can issue events")

@@ -1,4 +1,8 @@
 defmodule RoboPirate do
+  @moduledoc """
+  Starts the server, if running in the test enviroment it also starts the mock
+  server on the port specified in the enviroment variable
+  """
   alias Plug.Adapters.Cowboy
   use Application
 
