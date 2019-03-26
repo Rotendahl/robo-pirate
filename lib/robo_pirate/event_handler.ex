@@ -19,4 +19,8 @@ defmodule RoboPirate.EventHandler do
     %{"text" => _text, "channel" => channel, "user" => _user} = event
     MessageSender.dont_understand(channel)
   end
+
+  def handle_event(_) do
+    {:error, "Unhandled event"}
+  end
 end
