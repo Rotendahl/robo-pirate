@@ -21,7 +21,11 @@ config :robo_pirate, legacy_token: System.get_env("LEGACY_TOKEN")
 
 config :robo_pirate,
   slack_url:
-    System.get_env("SLACK_URL") <> ":" <> System.get_env("SLACK_PORT") <> "/"
+    (if System.get_env("SLACK_PORT") == "80" do
+       System.get_env("SLACK_URL") <> "/"
+     else
+       System.get_env("SLACK_URL") <> ":" <> System.get_env("SLACK_PORT") <> "/"
+     end)
 
 config :robo_pirate, invite_channel: System.get_env("INVITE_THREAD")
 config :robo_pirate, announcemnts_id: System.get_env("ANNOUNCEMNTS_ID")
