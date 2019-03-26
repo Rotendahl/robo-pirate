@@ -1,4 +1,9 @@
 defmodule RoboPirate.EventHandler do
+  @moduledoc """
+    Module that handles all events by calling other functions.
+    They should all return {:ok, msg} or {:error, reasons}
+  """
+
   alias RoboPirate.MessageSender
 
   def handle_event(%{"type" => "channel_created", "channel" => channel_info}) do

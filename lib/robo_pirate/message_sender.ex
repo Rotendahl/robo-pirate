@@ -1,4 +1,9 @@
 defmodule RoboPirate.MessageSender do
+  @moduledoc """
+    All messages sent go through this module.
+    Each function should return with either
+      {:ok, resp} or {:error, reason}
+  """
   @announcemnts_id Application.get_env(:robo_pirate, :announcemnts_id)
   @send_url Application.get_env(:robo_pirate, :slack_url) <> "chat.postMessage"
   @update_url Application.get_env(:robo_pirate, :slack_url) <> "chat.update"

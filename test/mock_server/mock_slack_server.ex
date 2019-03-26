@@ -1,4 +1,8 @@
 defmodule RoboPirateTest.MockSlackServer do
+  @moduledoc """
+  A mock server used for testing purposes. It should validate the input on
+  all json and give either a succes or faliure error code
+  """
   use Plug.Router
 
   plug(Plug.Parsers,

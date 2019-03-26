@@ -1,4 +1,7 @@
 defmodule RoboPirate.Actions.InviteHandler do
+  @moduledoc """
+    Either sends an invitation or marks the request as denied. 
+  """
   alias RoboPirate.MessageSender
   @vol_channels Application.get_env(:robo_pirate, :volunteer_channels)
   @child_channels Application.get_env(:robo_pirate, :child_channels)

@@ -1,4 +1,7 @@
 defmodule RoboPirate.AuthHelper do
+  @moduledoc """
+    Module that helps check that messages actually come form slack. 
+  """
   @sign_secret Application.get_env(:robo_pirate, :sign_secret)
   @max_age Application.get_env(:robo_pirate, :max_age)
 
