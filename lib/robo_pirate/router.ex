@@ -53,6 +53,7 @@ defmodule RoboPirate.Router do
           {status, payload} =
             case EventHandler.handle_event(conn.body_params["event"]) do
               {:ok, %HTTPoison.Response{body: body}} -> {200, body}
+              {:ok, msg} -> {200, msg}
               {:error, error} -> {500, error}
               _unkown_error -> {500, "Unkown error"}
             end

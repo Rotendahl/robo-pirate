@@ -17,7 +17,7 @@ defmodule RoboPirateTest do
       conn(:get, "/#{Faker.Address.city()}", "")
       |> Router.call(@opts)
 
-    assert status = 404
+    assert status == 404
     assert resp == "not_found"
   end
 
@@ -35,7 +35,10 @@ defmodule RoboPirateTest do
       conn(:post, "/action", Poison.encode!(%{Hello: "world"}))
       |> Plug.Conn.put_req_header("content-type", "application/json")
       |> Plug.Conn.put_req_header("x-slack-signature", "v0=wrong-signature")
-      |> Plug.Conn.put_req_header("x-slack-request-timestamp", (System.system_time(:second) |> Integer.to_string()))
+      |> Plug.Conn.put_req_header(
+        "x-slack-request-timestamp",
+        System.system_time(:second) |> Integer.to_string()
+      )
       |> Router.call(@opts)
 
     assert resp == "Only slack can issue actions"
