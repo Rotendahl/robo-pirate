@@ -3,6 +3,8 @@ defmodule RoboPirate.Actions.InviteHandler do
   @vol_channels Application.get_env(:robo_pirate, :volunteer_channels)
   @child_channels Application.get_env(:robo_pirate, :child_channels)
   @token Application.get_env(:robo_pirate, :legacy_token)
+  @invite_url Application.get_env(:robo_pirate, :slack_url) <>
+                "users.admin.invite"
 
   def invite(action = %{"actions" => [%{"action_id" => decision} | _]}) do
     %{
@@ -96,7 +98,7 @@ defmodule RoboPirate.Actions.InviteHandler do
 
     body = {:form, req_fields}
 
-    HTTPoison.request(:post, "https://slack.com/api/users.admin.invite", body, [
+    HTTPoison.request(:post, @invite_url, body, [
       {"Content-Type", "application/x-www-form-urlencoded"}
     ])
   end

@@ -1,7 +1,12 @@
 defmodule RoboPirate.RequestInvite do
   @invite_channel Application.get_env(:robo_pirate, :invite_channel)
 
-  def payload(%{"email" => mail, "info" => info, "name" => name, "type" => type}) do
+  def encode_payload(%{
+        "email" => mail,
+        "info" => info,
+        "name" => name,
+        "type" => type
+      }) do
     %{
       channel: @invite_channel,
       text: "#{name}, vil gerne have en invitaion til slack",
@@ -68,5 +73,9 @@ defmodule RoboPirate.RequestInvite do
       ]
     }
     |> Poison.encode()
+  end
+
+  def encode_payload(_) do
+    {:error, "Invalid payload"}
   end
 end

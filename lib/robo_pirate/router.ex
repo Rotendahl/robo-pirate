@@ -29,13 +29,9 @@ defmodule RoboPirate.Router do
   end
 
   post "/invite" do
-    %{body_params: params} = conn
-    status_code = MessageSender.request_invite(params)
-
-    if status_code == 200 do
-      send_file(conn, status_code, "lib/html/success.html")
-    else
-      send_file(conn, status_code, "lib/html/error.html")
+    case MessageSender.request_invite(conn.params) do
+      {:ok, _} -> send_file(conn, 200, "lib/html/success.html")
+      {:error, _reason} -> send_file(conn, 402, "lib/html/error.html")
     end
   end
 
@@ -50,29 +46,32 @@ defmodule RoboPirate.Router do
   end
 
   post "/event" do
-    %{"type" => type} = conn.body_params
-    params = conn.body_params
+    if conn |> AuthHelper.from_slack?() do
+      case conn.body_params["type"] do
+        "event_callback" ->
+          {status, payload} =
+            case EventHandler.handle_event(conn.body_params["event"]) do
+              {:ok, %HTTPoison.Response{body: body}} -> {200, body}
+              {:error, error} -> {500, error}
+              _unkown_error -> {500, "Unkown error"}
+            end
 
-    case type do
-      "url_verification" ->
-        %{"token" => token, "challenge" => chal} = conn.body_params
+          send_resp(conn, status, payload)
 
-        if token == Application.get_env(:robo_pirate, :slack_token) do
-          send_resp(conn, 200, chal)
-        else
-          send_resp(conn, 401, "Incorret token")
-        end
+        "url_verification" ->
+          %{"token" => token, "challenge" => chal} = conn.body_params
 
-      "event_callback" ->
-        if conn |> AuthHelper.from_slack?() do
-          Task.async(fn -> EventHandler.handle_event(params) end)
-          send_resp(conn, 200, "")
-        else
-          send_resp(conn, 401, "Only slack can issue actions")
-        end
+          if token == Application.get_env(:robo_pirate, :slack_token) do
+            send_resp(conn, 200, chal)
+          else
+            send_resp(conn, 401, "Incorret token")
+          end
 
-      _ ->
-        send_resp(conn, 200, "not_supported")
+        _unkown_event_type ->
+          send_resp(conn, 500, "Unhandled event Type")
+      end
+    else
+      send_resp(conn, 401, "Only slack can issue events")
     end
   end
 

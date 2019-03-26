@@ -5,7 +5,8 @@ defmodule RoboPirate.MixProject do
     [
       app: :robo_pirate,
       version: "0.1.0",
-      elixir: "~> 1.7",
+      elixir: "~> 1.8",
+      elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       build_embedded: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
@@ -18,6 +19,10 @@ defmodule RoboPirate.MixProject do
       deps: deps()
     ]
   end
+
+  # Specifies which paths to compile per environment.
+  defp elixirc_paths(:test), do: ["lib", "test/mock_server"]
+  defp elixirc_paths(_), do: ["lib"]
 
   # Run "mix help compile.app" to learn about applications.
   def application do
@@ -34,6 +39,7 @@ defmodule RoboPirate.MixProject do
       {:poison, "~> 4.0"},
       {:httpoison, "~> 1.5"},
       {:excoveralls, ">= 0.0.0", only: :test},
+      {:faker, ">= 0.0.0", only: :test},
       {:credo, "~> 1.0.0", only: [:dev, :test], runtime: false},
       {:junit_formatter, ">= 0.0.0", only: :test}
     ]
