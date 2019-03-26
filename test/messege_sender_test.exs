@@ -7,12 +7,13 @@ defmodule RoboPirateTest.MessageTest do
     msg = Beer.name()
     channel = Beer.brand()
 
-    %{status_code: status, body: raw_body} =
+    {succes, %{status_code: status, body: raw_body}} =
       MessageSender.send_message(msg, channel)
 
     body = Poison.decode!(raw_body)
 
     assert 200 == status
+    assert succes == :ok
     assert msg == body["text"]
     assert channel == body["channel"]
   end
