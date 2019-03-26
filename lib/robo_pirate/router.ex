@@ -38,7 +38,6 @@ defmodule RoboPirate.Router do
 
   post "/action" do
     if conn |> AuthHelper.from_slack?() do
-      IO.inspect(conn)
       {:ok, payload} = conn.body_params["payload"] |> Poison.decode()
       Task.async(fn -> ActionHandler.handle_action(payload) end)
       send_resp(conn, 200, "")
