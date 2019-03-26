@@ -1,4 +1,4 @@
 ---
 linters:
     credo:
-        strict
+        ignore-checks: duplicated
