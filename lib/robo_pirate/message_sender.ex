@@ -2,7 +2,8 @@ defmodule RoboPirate.MessageSender do
   @announcemnts_id Application.get_env(:robo_pirate, :announcemnts_id)
   @send_url Application.get_env(:robo_pirate, :slack_url) <> "chat.postMessage"
   @update_url Application.get_env(:robo_pirate, :slack_url) <> "chat.update"
-  @new_channel Application.get_env(:robo_pirate, :slack_url) <> "channels.create"
+  @new_channel Application.get_env(:robo_pirate, :slack_url) <>
+                 "channels.create"
   @bot_token Application.get_env(:robo_pirate, :bot_token)
   @oauth_token Application.get_env(:robo_pirate, :oauth_token)
   @bot_headers [
@@ -27,9 +28,12 @@ defmodule RoboPirate.MessageSender do
   end
 
   def create_channel(name) do
-    {:ok, body} = %{
-      "name" => name
-    } |> Poison.encode()
+    {:ok, body} =
+      %{
+        "name" => name
+      }
+      |> Poison.encode()
+
     HTTPoison.post(@new_channel, body, @oauth_token)
   end
 
@@ -41,12 +45,15 @@ defmodule RoboPirate.MessageSender do
       }
       |> Poison.encode()
 
-    HTTPoison.post(@send_url, body, @bot_headers)
+    HTTPoison.post!(@send_url, body, @bot_headers)
   end
 
   def request_invite(params) do
     {:ok, payload} = RoboPirate.RequestInvite.payload(params)
-    {:ok, %{status_code: status}} = HTTPoison.post(@send_url, payload, @bot_headers)
+
+    {:ok, %{status_code: status}} =
+      HTTPoison.post(@send_url, payload, @bot_headers)
+
     status
   end
 
@@ -142,6 +149,6 @@ defmodule RoboPirate.MessageSender do
       }
       |> Poison.encode()
 
-    IO.inspect(HTTPoison.post(@send_url, thread_payload, @bot_headers))
+    HTTPoison.post(@send_url, thread_payload, @bot_headers)
   end
 end

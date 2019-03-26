@@ -3,8 +3,6 @@ defmodule RoboPirateTest do
   use Plug.Test
 
   alias RoboPirate.Router
-
-  @token Application.get_env(:robo_pirate, :slack_token)
   @opts Router.init([])
 
   test "Test get root / call" do
@@ -12,28 +10,24 @@ defmodule RoboPirateTest do
       conn(:get, "/", "")
       |> Router.call(@opts)
 
-    index = File.read("lib/html/index.html") |> elem(1)
-    assert resp == index
+    assert resp == File.read("lib/html/index.html") |> elem(1)
   end
 
-  test "Test verify url" do
-    payload = %{
-      type: "url_verification",
-      token: @token,
-      challenge: String.reverse(@token)
-    }
-
-    %{resp_body: resp, status: status} =
-      conn(:post, "/event", payload)
+  test "Test event not from slack" do
+    %{status: deny, resp_body: resp} =
+      conn(:post, "/event", %{})
       |> Router.call(@opts)
 
-    assert status == 200
-    assert resp == String.reverse(@token)
+    assert resp == "Only slack can issue events"
+    assert deny == 401
+  end
 
-    %{status: deny} =
-      conn(:post, "/event", Map.put(payload, :token, "a"))
+  test "Test action not from slack" do
+    %{status: deny, resp_body: resp} =
+      conn(:post, "/action", %{Hello: "world"})
       |> Router.call(@opts)
 
+    assert resp == "Only slack can issue actions"
     assert deny == 401
   end
 end

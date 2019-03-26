@@ -3,15 +3,26 @@ defmodule RoboPirate do
   use Application
 
   def start(_type, _args) do
-    {port, _} = Integer.parse(Application.get_env(:robo_pirate, :port))
-
-    children = [
-      Cowboy.child_spec(
-        scheme: :http,
-        plug: RoboPirate.Router,
-        options: [port: port]
-      )
-    ]
+    children =
+      [
+        Cowboy.child_spec(
+          scheme: :http,
+          plug: RoboPirate.Router,
+          options: [port: Application.get_env(:robo_pirate, :port)]
+        )
+      ] ++
+        if Mix.env() != :test do
+          []
+        else
+          [
+            Cowboy.child_spec(
+              scheme: :http,
+              plug: RoboPirateTest.MockSlackServer,
+              options: [port: Application.get_env(:robo_pirate, :slack_port)],
+              ref: :test
+            )
+          ]
+        end
 
     Supervisor.start_link(children, strategy: :one_for_one)
   end
