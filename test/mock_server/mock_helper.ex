@@ -7,7 +7,6 @@ defmodule RoboPirateTest.MockSlackHelper do
 
   def add_slack_headers(conn) do
     timestamp = System.system_time(:second) |> Integer.to_string()
-    body = conn.body_params |> Poison.encode!()
     {:ok, body, _conn} = Conn.read_body(conn)
 
     signature =

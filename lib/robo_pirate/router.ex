@@ -1,9 +1,9 @@
 defmodule RoboPirate.Router do
+  require Logger
   alias RoboPirate.ActionHandler
   alias RoboPirate.AuthHelper
   alias RoboPirate.EventHandler
   alias RoboPirate.MessageSender
-  import Logger
   use Plug.Router
   use Plug.Builder
   use Plug.Debugger, otp_app: :robo_pirate
