@@ -31,7 +31,8 @@ defmodule RoboPirate.ActionHandler do
           resp
         else
           final_attachments =
-            remove_vote(msg["attachments"], user)
+            msg["attachments"]
+            |> remove_vote(user)
             |> cast_vote(user, decision)
 
           {:ok, resp} =
@@ -58,9 +59,8 @@ defmodule RoboPirate.ActionHandler do
     end
   end
 
-  def handle_action(action) do
-    IO.inspect("unhandled action")
-    IO.inspect(action)
+  def handle_action(_action) do
+    {:err, "unhandled action"}
   end
 
   defp cast_vote(attachments, user, decision) do

@@ -25,7 +25,9 @@ defmodule RoboPirate.EventHandler do
              "Du skal skrive \`vote public/private skal vi have en øl\`")
           |> MessageSender.send_message(channel)
         end
+
         {:ok, "temp_solution"}
+
       true ->
         MessageSender.dont_understand(channel)
         {:ok, "temp_solution"}

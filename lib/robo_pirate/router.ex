@@ -50,9 +50,6 @@ defmodule RoboPirate.Router do
   end
 
   post "/event" do
-    IO.inspect "Event spotted"
-    IO.inspect "From slack"
-    IO.inspect (conn)
     if conn |> AuthHelper.from_slack?() do
       case conn.body_params["type"] do
         "event_callback" ->
@@ -62,8 +59,7 @@ defmodule RoboPirate.Router do
               {:error, error} -> {500, error}
               _unkown_error -> {500, "Unkown error"}
             end
-          IO.inspect status
-          IO.inspect payload
+
           send_resp(conn, status, payload)
 
         "url_verification" ->
