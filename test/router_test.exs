@@ -1,7 +1,6 @@
 defmodule RoboPirateTest do
   use ExUnit.Case
   use Plug.Test
-
   alias RoboPirate.Router
   @opts Router.init([])
 
@@ -13,13 +12,13 @@ defmodule RoboPirateTest do
     assert resp == File.read("lib/html/index.html") |> elem(1)
   end
 
-  test "Test event not from slack" do
-    %{status: deny, resp_body: resp} =
-      conn(:post, "/event", %{})
+  test "Test unhandled route" do
+    %{resp_body: resp, status: status} =
+      conn(:get, "/#{Faker.Address.city()}", "")
       |> Router.call(@opts)
 
-    assert resp == "Only slack can issue events"
-    assert deny == 401
+    assert status = 404
+    assert resp == "not_found"
   end
 
   test "Test action not from slack" do
